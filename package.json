@@ -1,0 +1,18 @@
+{
+  "name": "webpack",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "style-loader": "~0.6.0",
+    "url-loader": "~0.5.2",
+    "coffee-loader": "~0.6.0",
+    "css-loader": "~0.6.6",
+    "jsx-loader": "git://github.com/jtangelder/jsx-loader.git"
+  }
+}
