@@ -1,18 +1,21 @@
 ###* @jsx React.DOM ###
 
 React = require 'react'
+Cursor = require '../components/Cursor.coffee'
 
 module.exports = React.createClass
   componentDidMount: ->
     @interval = setInterval(
-      (=> @setState now: new Date().getTime()),
-      20)
-
+      (=> @setState now: new Date().getTime()), 200)
+    
   componentWillUnmount: ->
     clearInterval @interval
     
   getInitialState: ->
     now: new Date().getTime()
+    
+  handleTextValue: (ev)->
+    @setState textvalue: ev.target.value
     
   render: ->
     styles =
@@ -22,8 +25,12 @@ module.exports = React.createClass
               <h1 style={styles}><span>Page</span></h1>
               <p>This is a normal page</p>
               <h2>{this.state.now}</h2>              
-              <p><textarea>Type something</textarea></p>
+              <p><textarea onChange={this.handleTextValue} placeholder="Type something"></textarea></p>
+              <h3>{this.state.textvalue || "Empty"}</h3>
+              <hr />
               <p>{JSON.stringify(this.props.path)}</p>
               <p>{JSON.stringify(this.props.query)}</p>
               <p>{JSON.stringify(this.props.params)}</p>
+              
+              <Cursor />
             </div>`
