@@ -1,58 +1,81 @@
 React = require 'react'
 
-class ViewRouter
-  constructor: ()->
-    @routes = {}
-
+ViewRouter =
+  routes : {}
+  
+  normalizePath: (path)->
+    path = path.split("/")
+    path.unshift("/") # always start with an /
+    path.push("/") # always end with an /
+    return path.join("/").replace(/\/{2,}/g, "/")
+    
+    
+  parseQueryString: (query)->
+    query = decodeURI(query)
+    qparts = query.split(/&/g)
+    params = {}
+    for param in qparts
+      [name, val] = param.split("=")
+      params[name] = val
+    params
+    
+    
   normalizeHash: (hash)->
     hash = hash.replace(/^#!/, '')
     
     [path, query] = hash.split("?")
-    
-    # path
-    path = path.split("/")
-    path.unshift("/") # always start with an /
-    path.push("/") # always end with an /
-    path = path.join("/").replace(/\/{2,}/g, "/")
-    
-    # query
-    if query
-      qparts = query.split("&")
-      query_params = {}
-      for param in qparts
-        [name, val] = param.split("=")
-        query_params[name] = val
-    
-    return [path, query_params || {}]
+
+    path = @normalizePath(path)
+    if query then params = @parseQueryString(query)
+      
+    full = "#{(path or "")}#{(if query then "?"+query else "")}"
+    return [path, params or {}, full]
     
     
-  getComponentByHash: (path)->    
+  getRouteByPath: (path)->    
     # find url matching...
-    return obj for [regex, obj] in @routes when new RegExp(regex).test(path)
+    for [regex, component] in @routes       
+      if matches = path.match(new RegExp(regex))
+        return [component, matches.slice(1)];
+      
     # ...or go to the root..
-    @getComponentByHash("/")
+    getRouteByPath("/")
   
     
-  getComponent: -> 
+  navigate: (hash)->
+    window.location.hash = @getUrl(hash)
+    
+    
+  url: (hash)->
+    [path, query, full] = @normalizeHash(hash)
+    return "#!#{full}"
+    
+    
+  getViewComponent: -> 
     vr = this  
     React.createClass
-      getHashProps: (hash=window.location.hash)->
+      getStateData: (hash=window.location.hash)->
         [path, query] = vr.normalizeHash(hash)    
+        [component, params] = vr.getRouteByPath(path)
         
-        component: vr.getComponentByHash(path)
+        component: component
+        params: params
         path: path
         query: query
-    
-      componentDidMount: ->
-        window.addEventListener 'hashchange', =>
-          if window.location.hash.indexOf("#!") is 0
-            @setState @getHashProps()
+        
+      changeView: ->
+        if window.location.hash.indexOf("#!") is 0
+          @setState @getStateData()
+        
+      componentWillUnmount: -> window.removeEventListener 'hashchange', @changeView
+      componentDidMount: -> window.addEventListener 'hashchange', @changeView
     
       getInitialState: ->
-        @getHashProps()
+        @getStateData()
     
       render: ->
         this.state.component(
+          params: this.state.params
           path: this.state.path
           query: this.state.query
         )

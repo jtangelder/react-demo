@@ -6,7 +6,7 @@ module.exports = React.createClass
   componentDidMount: ->
     @interval = setInterval(
       (=> @setState now: new Date().getTime()),
-      1000)
+      20)
 
   componentWillUnmount: ->
     clearInterval @interval
@@ -25,4 +25,5 @@ module.exports = React.createClass
               <p><textarea>Type something</textarea></p>
               <p>{JSON.stringify(this.props.path)}</p>
               <p>{JSON.stringify(this.props.query)}</p>
+              <p>{JSON.stringify(this.props.params)}</p>
             </div>`
