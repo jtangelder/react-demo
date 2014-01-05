@@ -45,7 +45,8 @@ class ViewRouter
     
       componentDidMount: ->
         window.addEventListener 'hashchange', =>
-          @setState @getHashProps()
+          if window.location.hash.indexOf("#!") is 0
+            @setState @getHashProps()
     
       getInitialState: ->
         @getHashProps()

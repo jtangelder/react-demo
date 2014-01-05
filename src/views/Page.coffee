@@ -6,7 +6,7 @@ module.exports = React.createClass
   componentDidMount: ->
     @interval = setInterval(
       (=> @setState now: new Date().getTime()),
-      20)
+      1000)
 
   componentWillUnmount: ->
     clearInterval @interval
@@ -16,8 +16,8 @@ module.exports = React.createClass
     
   render: ->
     styles =
-      background: 'red'
-    
+      backgroundColor: "#"+ parseInt(this.props.path.split("/").join(""), 26).toString().substr(0,6) # random color, kind of
+
     return `<div>
               <h1 style={styles}><span>Page</span></h1>
               <p>This is a normal page</p>
