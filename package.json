@@ -9,6 +9,7 @@
   "author": "",
   "license": "BSD",
   "devDependencies": {
+    "react": "~0.8.0",
     "style-loader": "~0.6.0",
     "url-loader": "~0.5.2",
     "coffee-loader": "~0.6.0",

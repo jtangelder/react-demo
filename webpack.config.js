@@ -4,7 +4,7 @@ module.exports = {
       { test: /\.coffee$/, loader: "jsx-loader!coffee-loader" },
       { test: /\.jsx?$/, loader: "jsx-loader" },   
       
-      { test: /\.css/, loader: "style-loader/url!url-loader?limit=10000&minetype=text/css" },
+      { test: /\.css/, loader: "style-loader/url!url-loader?limit=10000&minetype=text/css&prefix=build/" },
       
       { test: /\.gif$/, loader: "url-loader?limit=10000&minetype=image/gif" },
       { test: /\.jpg$/, loader: "url-loader?limit=10000&minetype=image/jpg" },
