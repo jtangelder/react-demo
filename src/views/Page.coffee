@@ -2,6 +2,7 @@
 
 React = require 'react'
 Cursor = require '../components/Cursor.coffee'
+Debug = require '../components/Debug.coffee'
 
 module.exports = React.createClass
   componentDidMount: ->
@@ -27,10 +28,6 @@ module.exports = React.createClass
               <h2>{this.state.now}</h2>              
               <p><textarea onChange={this.handleTextValue} placeholder="Type something"></textarea></p>
               <h3>{this.state.textvalue || "Empty"}</h3>
-              <hr />
-              <p>{JSON.stringify(this.props.path)}</p>
-              <p>{JSON.stringify(this.props.query)}</p>
-              <p>{JSON.stringify(this.props.params)}</p>
-              
+              <Debug />              
               <Cursor />
             </div>`

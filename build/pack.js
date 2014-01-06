@@ -182,11 +182,13 @@
 
 	/** @jsx React.DOM*/
 
-	var Cursor, React;
+	var Cursor, Debug, React;
 
 	React = require(7);
 
 	Cursor = require(9);
+
+	Debug = require(132);
 
 	module.exports = React.createClass({
 	  componentDidMount: function() {
@@ -221,11 +223,7 @@
 	              React.DOM.h2(null, this.state.now),              
 	              React.DOM.p(null, React.DOM.textarea( {onChange:this.handleTextValue, placeholder:"Type something"})),
 	              React.DOM.h3(null, this.state.textvalue || "Empty"),
-	              React.DOM.hr(null ),
-	              React.DOM.p(null, JSON.stringify(this.props.path)),
-	              React.DOM.p(null, JSON.stringify(this.props.query)),
-	              React.DOM.p(null, JSON.stringify(this.props.params)),
-	              
+	              Debug(null ),              
 	              Cursor(null )
 	            );
 	  }
@@ -238,11 +236,13 @@
 
 	/** @jsx React.DOM*/
 
-	var Cursor, React;
+	var Cursor, Debug, React;
 
 	React = require(7);
 
 	Cursor = require(9);
+
+	Debug = require(132);
 
 	module.exports = React.createClass({
 	  render: function() {
@@ -254,6 +254,7 @@
 	              React.DOM.h1( {style:styles}, React.DOM.span(null, "Main")),
 	              React.DOM.p(null, "This is the Homepage"),
 	              React.DOM.p(null, React.DOM.textarea(null)),
+	              Debug( {component:this} ),    
 	              Cursor(null )
 	            );
 	  }
@@ -14858,6 +14859,50 @@
 	};
 
 	module.exports = Danger;
+
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, require) {
+
+	/** @jsx React.DOM*/
+
+	var React,
+	  __hasProp = {}.hasOwnProperty;
+
+	React = require(7);
+
+	module.exports = React.createClass({
+	  render: function() {
+	    var data, key, prop, value, _i, _len, _ref;
+	    data = {};
+	    _ref = ['props', 'state'];
+	    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+	      prop = _ref[_i];
+	      data[prop] = (function() {
+	        var _ref1, _results;
+	        _ref1 = this.props.__owner__[prop];
+	        _results = [];
+	        for (key in _ref1) {
+	          if (!__hasProp.call(_ref1, key)) continue;
+	          value = _ref1[key];
+	          if (key !== '__owner__') {
+	            _results.push("" + key + ": " + (JSON.stringify(value)));
+	          }
+	        }
+	        return _results;
+	      }).call(this);
+	    }
+	    return React.DOM.div(null, 
+	              React.DOM.dl(null, 
+	                React.DOM.dt(null, "Properties"),
+	                React.DOM.dd(null, data.props.join(", ")),
+	                React.DOM.dt(null, "State"),
+	                React.DOM.dd(null, data.state.join(", "))
+	              )
+	            );
+	  }
+	});
 
 
 /***/ }
