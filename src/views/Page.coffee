@@ -25,9 +25,12 @@ module.exports = React.createClass
     return `<div>
               <h1 style={styles}><span>Page</span></h1>
               <p>This is a normal page</p>
+              
               <h2>{this.state.now}</h2>              
+              
               <p><textarea onChange={this.handleTextValue} placeholder="Type something"></textarea></p>
               <h3>{this.state.textvalue || "Empty"}</h3>
+              
               <Debug />              
               <Cursor />
             </div>`
