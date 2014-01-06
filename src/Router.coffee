@@ -1,6 +1,6 @@
 React = require 'react'
 
-ViewRouter =
+Router =
   routes : {}
   
   normalizePath: (path)->
@@ -80,4 +80,4 @@ ViewRouter =
           query: this.state.query
         )
   
-module.exports = ViewRouter
+module.exports = Router

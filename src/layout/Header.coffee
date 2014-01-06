@@ -1,7 +1,7 @@
 ###* @jsx React.DOM ###
 
 React = require 'react'
-router = require('../ViewRouter.coffee')
+router = require('../Router.coffee')
 
 module.exports = React.createClass
   render: ->

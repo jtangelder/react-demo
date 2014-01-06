@@ -1,13 +1,12 @@
 ###* @jsx React.DOM ###
 
 require "./styles.css"
+
 React = require 'react'
-
 React.initializeTouchEvents true
-
  
 # setup router
-router = require './ViewRouter.coffee'
+router = require './Router.coffee'
 router.routes = [
   ["^/page/([0-9]*)/?", require './views/Page.coffee']
   ["^/page/?", require './views/Page.coffee']
@@ -15,10 +14,4 @@ router.routes = [
 ]  
   
 # start  
-Header = require './layout/Header.coffee'
-React.renderComponent `
-  <div>
-    <Header />
-    {router.getViewComponent()()}
-  </div>`,
-  document.getElementById('container')
+require './views/Root.coffee'

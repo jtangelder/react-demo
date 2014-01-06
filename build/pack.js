@@ -220,9 +220,12 @@
 	    return React.DOM.div(null, 
 	              React.DOM.h1( {style:styles}, React.DOM.span(null, "Page")),
 	              React.DOM.p(null, "This is a normal page"),
+	              
 	              React.DOM.h2(null, this.state.now),              
+	              
 	              React.DOM.p(null, React.DOM.textarea( {onChange:this.handleTextValue, placeholder:"Type something"})),
 	              React.DOM.h3(null, this.state.textvalue || "Empty"),
+	              
 	              Debug(null ),              
 	              Cursor(null )
 	            );
@@ -254,6 +257,7 @@
 	              React.DOM.h1( {style:styles}, React.DOM.span(null, "Main")),
 	              React.DOM.p(null, "This is the Homepage"),
 	              React.DOM.p(null, React.DOM.textarea(null)),
+	              
 	              Debug( {component:this} ),    
 	              Cursor(null )
 	            );
