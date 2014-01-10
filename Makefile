@@ -1,5 +1,5 @@
 watch:
 	webpack src/index.coffee build/pack.js -w
-	
-server:	
+
+server:
 	python -m SimpleHTTPServer

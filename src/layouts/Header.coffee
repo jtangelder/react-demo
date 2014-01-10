@@ -1,7 +1,6 @@
 ###* @jsx React.DOM ###
 
 React = require 'react'
-App = require '../../App.coffee'
 
 module.exports = React.createClass
   render: ->

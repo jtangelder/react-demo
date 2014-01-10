@@ -1,14 +1,16 @@
 ###* @jsx React.DOM ###
 
 React = require 'react'
-App = require '../App.coffee'
 
-Header = require '../components/layout/Header.coffee'
+Header = require './Header.coffee'
 
 module.exports = React.createClass
+  getInitialState: ->
+    {}
+
   render: ->
     `<div>
       <Header />
       <hr />
-      {this.state.component}
+      {this.state.component || ""}
     </div>`
