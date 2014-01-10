@@ -1,9 +1,10 @@
 ###* @jsx React.DOM ###
 
 React = require 'react'
+App = require '../App.coffee'
 Debug = require '../components/Debug.coffee'
 
-module.exports = React.createClass
+Component = React.createClass
   render: ->
     styles =
       background: 'blue'
@@ -15,3 +16,11 @@ module.exports = React.createClass
 
       <Debug component={this} />
     </div>`
+
+module.exports =
+  init: ->
+    App.router.route "", "main", ()->
+      console.log App, arguments
+      React.renderComponent `<Component />`, App.viewElement
+
+  component: Component

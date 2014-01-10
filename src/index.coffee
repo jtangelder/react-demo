@@ -1,23 +1,24 @@
-App = require './App.coffee'
-
 jQuery = require 'jquery'
 Backbone = require 'backbone'
 Backbone.$ = jQuery
-
 
 React = require 'react'
 React.initializeTouchEvents true
 
 
-App.layout = new require './layouts/Base.coffee'
+App = require './App.coffee'
+App.router = new Backbone.Router()
 
-App.controllers =
-  'Main': new require './controllers/Main.coffee'
-  'Page': new require './controllers/Page.coffee'
+# init the controllers
+require('./controllers/Main.coffee').init()
+require('./controllers/Page.coffee').init()
 
-App.route = Backbone.Router.extend
-  routes:
-    "!":              "Main"
-    "!page(/:query)": "Page"
 
-App.start()
+# render base view
+BaseView = require './layouts/Base.coffee'
+React.renderComponent BaseView(), document.body
+
+
+# setup app and go!
+App.viewElement = jQuery('#container')[0]
+Backbone.history.start()

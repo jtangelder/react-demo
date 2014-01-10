@@ -1,12 +1,14 @@
 ###* @jsx React.DOM ###
 
 React = require 'react'
+App = require '../App.coffee'
 Debug = require '../components/Debug.coffee'
 
-module.exports = React.createClass
+
+Component = React.createClass
   componentDidMount: ->
     @interval = setInterval(
-      (=> @setState now: new Date().getTime()), 200*Math.random())
+      (=> @setState now: new Date().getTime()), 30)
 
   componentWillUnmount: ->
     clearInterval @interval
@@ -29,3 +31,11 @@ module.exports = React.createClass
 
       <Debug />
     </div>`
+
+
+module.exports =
+  init: ->
+    App.router.route "page(/:query)", "main", (query)->
+      React.renderComponent `<Component />`, App.viewElement
+
+  component: Component
