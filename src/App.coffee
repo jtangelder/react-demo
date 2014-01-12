@@ -1,10 +1,13 @@
 React = require 'react'
 EventEmitter = require 'eventEmitter'
 
+
 # backbone with zepto
 require 'zepto'
+_ = require 'lodash'
+
 Backbone = require 'backbone'
-Backbone.$ = global.Zepto
+Backbone.$ = global.Zepto 
 
 # query params and named parameters with this backbone plugin
 require 'backbone-query-parameters'
@@ -38,7 +41,7 @@ App =
       component: component, 
       props: props
       
-    @emit "regionUpdate", name, component, props
+    @emit "regionChange", name, component, props
       
   # get region component, or return empty function placeholder
   renderRegion: (name)->

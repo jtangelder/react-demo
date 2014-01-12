@@ -42,4 +42,4 @@ module.exports = ->
     App.setRegion "main", Component, params
   
   App.router.route "page", "page", pageController    
-  App.router.route "page/:query", "page", pageController
+  App.router.route "page/:query", "pageQuery", pageController

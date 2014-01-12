@@ -3,14 +3,16 @@ var DirectoryDescriptionFilePlugin = require("enhanced-resolve/lib/DirectoryDesc
 module.exports = {
   module: {
     loaders: [
-      { test: /\.coffee$/, loader: "jsx-loader!coffee-loader" },
+      { test: /\.coffee/, loader: "jsx-loader!coffee-loader" },
       { test: /\.jsx?$/, loader: "jsx-loader" },
 
-      { test: /\.css/, loader: "style-loader/url!file" },
+      { test: /\.css/, loader: "url-loader?limit=10000!style-loader!css-loader" },
 
-      { test: /\.gif$/, loader: "url-loader?limit=10000&minetype=image/gif" },
-      { test: /\.jpg$/, loader: "url-loader?limit=10000&minetype=image/jpg" },
-      { test: /\.png$/, loader: "url-loader?limit=10000&minetype=image/png" },
+      { test: /\.gif/, loader: "url-loader?limit=10000&minetype=image/gif" },
+      { test: /\.jpg/, loader: "url-loader?limit=10000&minetype=image/jpg" },
+      { test: /\.png/, loader: "url-loader?limit=10000&minetype=image/png" },
+      ,
+      { test: /\.(woff|eot|ttf|svg)/, loader: "url-loader" }
     ]
   },
 
