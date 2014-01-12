@@ -1,4 +1,12 @@
-react-demo
+reactbone
 ==========
 
-Playground for React and webpack.
+Playground for React, Backbone and webpack.
+
+I might want to use this as a boilerplate for some apps that require models, routing, views with React and regions. Also all build with webpack.
+
+
+### Todo
+- Implement models example
+- Include small REST server 
+- Small example apps
