@@ -25,9 +25,8 @@ module.exports = {
 
   plugins: [
     function() {
-      this.resolvers.normal.apply(
-        new DirectoryDescriptionFilePlugin("bower.json", ["main"])
-      )
+      this.resolvers.normal.apply(new DirectoryDescriptionFilePlugin("component.json", ["main"]));
+      this.resolvers.normal.apply(new DirectoryDescriptionFilePlugin("bower.json", ["main"]));
     }
   ]
 };

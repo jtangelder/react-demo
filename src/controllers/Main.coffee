@@ -17,10 +17,6 @@ Component = React.createClass
       <Debug component={this} />
     </div>`
 
-module.exports =
-  init: ->
-    App.router.route "", "main", ()->
-      console.log App, arguments
-      React.renderComponent `<Component />`, App.viewElement
-
-  component: Component
+module.exports = ->
+  App.router.route "", "main", ()->
+    App.setRegion "main", Component

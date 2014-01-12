@@ -9,9 +9,13 @@ Component = React.createClass
   componentDidMount: ->
     @interval = setInterval(
       (=> @setState now: new Date().getTime()), 30)
+    
+    App.on "pageSetText", (text)=>      
+      @setState textvalue: text
 
   componentWillUnmount: ->
     clearInterval @interval
+    App.events.removeAllListeners "pageSetText"
 
   getInitialState: ->
     now: new Date().getTime()
@@ -33,9 +37,9 @@ Component = React.createClass
     </div>`
 
 
-module.exports =
-  init: ->
-    App.router.route "page(/:query)", "main", (query)->
-      React.renderComponent `<Component />`, App.viewElement
-
-  component: Component
+module.exports = ->
+  pageController =  (params)->
+    App.setRegion "main", Component, params
+  
+  App.router.route "page", "page", pageController    
+  App.router.route "page/:query", "page", pageController
