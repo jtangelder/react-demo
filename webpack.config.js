@@ -13,15 +13,12 @@ module.exports = {
       { test: /\.png$/, loader: "url-loader?limit=10000&minetype=image/png" },
     ]
   },
-  define: {
-    'process.env.NODE_ENV': JSON.stringify('production')
-  },
 
   resolve: {
     modulesDirectories: ["./node_modules", "./bower_components"]
   },
 
-  amd: { jQuery: true },
+  amd: { Zepto: true },
 
   plugins: [
     function() {

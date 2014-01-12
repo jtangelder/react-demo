@@ -1,6 +1,10 @@
 React = require 'react'
+EventEmitter = require 'eventEmitter'
+
+# backbone with zepto
+require 'zepto'
 Backbone = require 'backbone'
-eventEmitter = require 'eventEmitter'
+Backbone.$ = global.Zepto
 
 # query params and named parameters with this backbone plugin
 require 'backbone-query-parameters'
@@ -9,7 +13,7 @@ Backbone.Router.namedParameters = true
 # react touch events
 React.initializeTouchEvents true
 
-event = new eventEmitter()
+event = new EventEmitter()
 router = new Backbone.Router()
 
 # namespace

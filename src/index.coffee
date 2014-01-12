@@ -1,8 +1,3 @@
-jQuery = require 'jquery'
-Backbone = require 'backbone'
-Backbone.$ = jQuery
-
-
 App = require './App.coffee'
 
 # init the controllers
