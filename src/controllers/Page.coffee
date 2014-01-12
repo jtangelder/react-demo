@@ -15,7 +15,7 @@ Component = React.createClass
 
   componentWillUnmount: ->
     clearInterval @interval
-    App.events.removeAllListeners "pageSetText"
+    App.event.removeAllListeners "pageSetText"
 
   getInitialState: ->
     now: new Date().getTime()

@@ -72,7 +72,7 @@
 /* 1 */
 /***/ function(module, exports, require) {
 
-	var App, Backbone, React, eventEmitter;
+	var App, Backbone, React, event, eventEmitter, router;
 
 	React = require(6);
 
@@ -86,43 +86,40 @@
 
 	React.initializeTouchEvents(true);
 
-	App = {};
+	event = new eventEmitter();
 
-	App.events = new eventEmitter();
+	router = new Backbone.Router();
 
-	App.on = App.events.on.bind(App.events);
-
-	App.off = App.events.off.bind(App.events);
-
-	App.emit = App.events.emit.bind(App.events);
-
-	App.router = new Backbone.Router();
-
-	App.regions = {};
-
-	App.setRegion = function(name, component, props) {
-	  if (App.regions[name] !== component) {
-	    App.regions[name] = {
+	App = {
+	  event: event,
+	  on: event.on.bind(event),
+	  off: event.off.bind(event),
+	  emit: event.emit.bind(event),
+	  router: router,
+	  regions: {},
+	  setRegion: function(name, component, props) {
+	    if (this.regions[name] === component) {
+	      return;
+	    }
+	    this.regions[name] = {
 	      component: component,
 	      props: props
 	    };
-	    return App.emit("regionUpdate", name, component, props);
+	    return this.emit("regionUpdate", name, component, props);
+	  },
+	  renderRegion: function(name) {
+	    var region;
+	    region = this.regions[name];
+	    if (region) {
+	      return region.component(region.props);
+	    } else {
+	      return "";
+	    }
+	  },
+	  dispatch: function(element) {
+	    React.renderComponent(this.baseComponent(), element);
+	    return Backbone.history.start();
 	  }
-	};
-
-	App.renderRegion = function(name) {
-	  var region;
-	  region = App.regions[name];
-	  if (region) {
-	    return region.component(region.props);
-	  } else {
-	    return "";
-	  }
-	};
-
-	App.dispatch = function(element) {
-	  React.renderComponent(App.baseComponent(), element);
-	  return Backbone.history.start();
 	};
 
 	module.exports = App;
@@ -195,7 +192,7 @@
 	  },
 	  componentWillUnmount: function() {
 	    clearInterval(this.interval);
-	    return App.events.removeAllListeners("pageSetText");
+	    return App.event.removeAllListeners("pageSetText");
 	  },
 	  getInitialState: function() {
 	    return {
